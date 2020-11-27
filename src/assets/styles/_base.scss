@@ -1,0 +1,24 @@
+@import 'partials/variables';
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.primary-button{
+    @extend %button;
+    background: $red;
+    color: white;
+}
+
+.secondary-button{
+    @extend %button;
+    background: none;
+    color: $red;
+}
