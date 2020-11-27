@@ -12,23 +12,35 @@
         <img src="./../../../../assets/svg/signup.svg" alt="login">
     </div>
     <div class="right">
-        <form action="">
+        <form [formGroup]="signupForm" (ngSubmit)="submit(signupForm.value)" >
             <h1>Hello!</h1>
             <div class="inputField">
-                <label for="email">Name</label><br/>
-                <input type="text" id="name" />
+                <label for="name">
+                    Name
+                    <span *ngIf="name.invalid && name.touched" class="error">   **Your name should be at least, 4 characters.</span>
+                </label><br/>
+                <input type="text" formControlName="name" id="name" />
             </div>
             <div class="inputField">
-                <label for="email">E-mail</label><br/>
-                <input type="text" id="email" />
+                <label for="email">
+                    E-mail
+                    <span *ngIf="email.invalid && email.touched" class="error">   **Your e-mail doesn't look right.</span>
+                </label><br/>
+                <input type="text" formControlName="email" id="email" />
             </div>
             <div class="inputField">
-                <label for="phone">Phone</label><br/>
-                <input type="text" id="phone" />
+                <label for="phone">
+                    Phone
+                    <span *ngIf="phone.invalid && phone.touched" class="error">   **Your phone number is not enough.</span>
+                </label><br/>
+                <input type="text" formControlName="phone" id="phone" />
             </div>
             <div class="inputField">
-                <label for="password">Password</label><br/>
-                <input type="password" id="password" />
+                <label for="password">
+                    Password
+                    <span *ngIf="password.invalid && password.touched" class="error">   **Your password is not enough.</span>
+                </label><br/>
+                <input type="password" formControlName="password" id="password" />
             </div>
             <primary-button [primaryButtonTitle]="signUp" ></primary-button>
 

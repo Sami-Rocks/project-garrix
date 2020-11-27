@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { SignupComponent } from './authentication/signup/signup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,12 +12,15 @@ import { SignupComponent } from './authentication/signup/signup.component';
   declarations: [HomeComponent, LoginComponent, SignupComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    FormsModule
   ]
 })
 export class ModulesModule { }

@@ -12,15 +12,21 @@
         <img src="./../../../../assets/svg/login.svg" alt="login">
     </div>
     <div class="right">
-        <form action="">
+        <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)" >
             <h1>Welcome back!</h1>
             <div class="inputField">
-                <label for="email">E-mail</label><br/>
-                <input type="text" id="name" />
+                <label for="email">
+                    E-mail
+                    <span *ngIf="email.invalid && email.touched" class="error">   **Your e-mail doesn't look right.</span>
+                </label><br/>
+                <input type="text" formControlName="email" id="email" />
             </div>
             <div class="inputField">
-                <label for="password">Password</label><br/>
-                <input type="password" id="password" />
+                <label for="password">
+                    Password
+                    <span *ngIf="password.invalid && password.touched" class="error">   **Your password is not enough.</span>
+                </label><br/>
+                <input type="password" formControlName="password" id="password" />
             </div>
             <primary-button [primaryButtonTitle]="logIn" ></primary-button>
 
