@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
 
+  logIn = "Log In"
+  signUp = "Sign Up"
+
   constructor() { }
 
   ngOnInit(): void {

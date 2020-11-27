@@ -9,6 +9,7 @@ body{
     height: 100vh;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    background: $background;
 }
 
 .primary-button{
@@ -16,9 +17,33 @@ body{
     background: $red;
     color: white;
 }
+.primary-button:hover{
+    background: rgba($color: $red, $alpha: .8);
+}
+.primary-button:active , .primary-button:focus{
+    outline: none;
+}
 
 .secondary-button{
     @extend %button;
     background: none;
     color: $red;
+}
+.secondary-button:hover{
+    background: rgba($color: $red, $alpha: .1);
+}
+.secondary-button:active, .secondary-button:focus{
+    outline: none;
+}
+
+.red{
+    color: $red;
+}
+
+h1{
+    font-size: 4.5rem;
+}
+p{
+    font-size: 2rem;
+    line-height: 3rem;
 }

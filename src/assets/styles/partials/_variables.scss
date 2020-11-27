@@ -15,10 +15,13 @@ $pink_dark: #C87B86;
 
 %button{
     border-radius: 7rem;
-    min-width: 15rem;
+    min-width: 20rem;
     width: fit-content;
     padding: 1.4rem 3rem;
     border: .2rem solid $red;
-    font-size: 1.7rem;
-    text-align: center
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: .3s all ease;
 }
+
