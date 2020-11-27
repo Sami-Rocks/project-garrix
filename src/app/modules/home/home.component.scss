@@ -55,7 +55,9 @@ header{
     .content{
         width: 80%;
         height: calc(100vh - 25rem);
+        
         .left{
+            width: 85%;
             h1{
                 font-size: 7rem;
             }

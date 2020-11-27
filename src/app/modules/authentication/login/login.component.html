@@ -1,0 +1,30 @@
+<header>
+    <div class="logo">
+        Garrix
+    </div>
+    <div class="sign-up">
+        <secondary-button [secondaryButtonTitle]="signUp" ></secondary-button>
+    </div>
+</header>
+
+<div class="content">
+    <div class="left">
+        <img src="./../../../../assets/svg/login.svg" alt="login">
+    </div>
+    <div class="right">
+        <form action="">
+            <h1>Welcome back!</h1>
+            <div class="inputField">
+                <label for="email">E-mail</label><br/>
+                <input type="text" id="name" />
+            </div>
+            <div class="inputField">
+                <label for="password">Password</label><br/>
+                <input type="password" id="password" />
+            </div>
+            <primary-button [primaryButtonTitle]="logIn" ></primary-button>
+
+            <p style="font-size: 1rem; margin-top: 7rem;" >Pariatur consequat voluptate sit mollit magna excepteur irure aute ut cupidatat elit.</p>
+        </form>
+    </div>
+</div>
