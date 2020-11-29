@@ -29,6 +29,13 @@
                 <input type="text" formControlName="email" id="email" />
             </div>
             <div class="inputField">
+                <label for="location">
+                    Location
+                    <span *ngIf="location.invalid && location.touched" class="error">   **Your e-mail doesn't look right.</span>
+                </label><br/>
+                <input type="text" formControlName="location" id="location" />
+            </div>
+            <div class="inputField">
                 <label for="phone">
                     Phone
                     <span *ngIf="phone.invalid && phone.touched" class="error">   **Your phone number is not enough.</span>

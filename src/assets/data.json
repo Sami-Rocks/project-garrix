@@ -1,0 +1,49 @@
+{
+    "events":[
+        {
+            "title":"Therapy 1",
+            "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
+            "location": "Ablekuma",
+            "client": "Kofi"
+        },
+        {
+            "title":"Therapy 2",
+            "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
+            "location": "Madina",
+            "client": "Ama"
+        },
+        {
+            "title":"Therapy 3 ",
+            "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
+            "location": "Ablekuma",
+            "client": "Kojo"
+        },
+        {
+            "title":"Therapy 4",
+            "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
+            "location": "Accra",
+            "client": "Adwoa"
+        },
+        {
+            "title":"Therapy 5",
+            "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
+            "location": "Tema",
+            "client": "Fofo"
+        },
+        {
+            "title":"Therapy 6",
+            "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
+            "location": "Madina",
+            "client": "Afia"
+        }
+    ],
+    "users":[
+        {
+            "name": "Samuel Owusu-Aboagye",
+            "location": "Accra",
+            "phone": "0242407403",
+            "email": "sowusuaboagye@gmail.com",
+            "password": "Password"
+        }
+    ]
+}

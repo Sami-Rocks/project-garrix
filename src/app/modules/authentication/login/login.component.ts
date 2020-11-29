@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/core/localStorage/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder:FormBuilder,
-    private router:Router
+    private router:Router,
+    private localStorageService:LocalStorageService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.localStorageService.checkLocalStorage()
   }
 
   submit(data){
@@ -41,8 +44,10 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.invalid){
       console.log('form values are invalid')
     }else{
-      console.log(data.email)
-      console.log(data.password)
+      if(this.localStorageService.login(data)){
+        this.router.navigateByUrl('dashboard')
+      }
+      
     }
   }
 
