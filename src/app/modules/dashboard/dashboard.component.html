@@ -2,7 +2,10 @@
     <div class="logo">
         Garrix
     </div>
-
+    <div class="welcome">
+        <span class="red" >Hello, </span>{{user.name}}
+    </div>
+    <secondary-button (click)="logout()" [secondaryButtonTitle]="logoutBtn" ></secondary-button>
 </header>
 
 <div class="container">
@@ -11,8 +14,8 @@
         <div class="application-list">
             <h2>My Applications</h2>
             <ul>
-                <li>application
-                    <button class="link-btn" (click)="showOrHideForm('id')" > edit </button>
+                <li *ngFor="let app of userApplications" >{{app.title}}
+                    <button class="link-btn" (click)="showOrHideForm(app.id)" > edit </button>
                 </li>
             </ul>
             <div class="add-btn">
@@ -21,7 +24,7 @@
         </div>
 
         <div class="application-form" *ngIf="showForm" >
-                <form [formGroup]="applicationForm" (ngSubmit)="submit(applicationForm.value)" >
+                <form [formGroup]="applicationForm"  >
                     <h3>Kindly complete the form</h3>
                     <div class="inputField">
                         <label for="name">
@@ -49,16 +52,18 @@
                             Description
                             <span *ngIf="description.invalid && description.touched" class="error">   **This Field cannot be empty.</span>
                         </label><br/>
-                        <input type="text" formControlName="description" id="description" />
+                        <textarea formControlName="description" id="description" ></textarea>
                     </div>
                     <div class="inputField">
                         <label for="date">
                             Date
                             <span *ngIf="date.invalid && date.touched" class="error">   **This Field cannot be empty.</span>
                         </label><br/>
-                        <input type="text" formControlName="date" id="date" />
+                        <input type="date" formControlName="date" id="date" 
+                        min="2020-01-01" max="2020-12-31">
                     </div>
-                    <primary-button [primaryButtonTitle]="submitBtn" ></primary-button>
+                    <primary-button *ngIf="!edit" (click)="submit()" [primaryButtonTitle]="submitBtn" ></primary-button>
+                    <primary-button *ngIf="edit" (click)="edit_()" [primaryButtonTitle]="editBtn" ></primary-button>
                 </form>
         </div>
         <div class="caut red">
@@ -84,9 +89,13 @@
                     <td class="calendar-day" [ngClass]="{'past-date': c.isPastDate, 'today': c.isToday}" *ngFor="let c of row; let j = index">
                         <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}">
                             <strong>{{c.date.getDate()}} </strong> 
-                            <ul >
-                                <li  *ngFor="let event of c.events">{{event.title}}</li>
-                            </ul>
+                            
+                                <p  *ngFor="let event of allApplications">
+                                    <ng-template [ngIf]="c.date.getDate() == event.date.getDate()">
+                                        *{{event.title}}
+                                    </ng-template>
+                                </p>
+                            
                             <strong *ngIf="c.isToday || (i==0 && j==0) || (c.date.getDate() == 1)"> {{monthNames[c.date.getMonth()]}}</strong>
                         </div>
                     </td>

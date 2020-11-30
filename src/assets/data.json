@@ -1,44 +1,63 @@
 {
     "events":[
         {
+            "id": 1,
             "title":"Therapy 1",
             "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
             "location": "Ablekuma",
-            "client": "Kofi"
+            "name": "Kofi",
+            "date": "2020-12-02",
+            "userID": 2
         },
         {
+            "id": 2,
             "title":"Therapy 2",
             "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
             "location": "Madina",
-            "client": "Ama"
+            "name": "Ama",
+            "date": "2020-12-02",
+            "userID": 32
         },
         {
+            "id": 3,
             "title":"Therapy 3 ",
             "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
             "location": "Ablekuma",
-            "client": "Kojo"
+            "name": "Kojo",
+            "date": "2020-12-02",
+            "userID": 23
         },
         {
+            "id": 4,
             "title":"Therapy 4",
             "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
             "location": "Accra",
-            "client": "Adwoa"
+            "name": "Adwoa",
+            "date": "2020-12-01",
+            "userID": 143
         },
         {
+            "id": 909,
             "title":"Therapy 5",
             "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
             "location": "Tema",
-            "client": "Fofo"
+            "name": "Fofo",
+            "date": "2020-12-02",
+            "userID": 123
         },
         {
+            "id": 6,
             "title":"Therapy 6",
             "description": "Sint qui nulla mollit in dolor dolore deserunt Lorem aute labore occaecat laborum ex.",
             "location": "Madina",
-            "client": "Afia"
+            "name": "Afia",
+            "userID": 6,
+            "date": "2020-12-01"
         }
     ],
     "users":[
         {
+            "id": 6,
             "name": "Samuel Owusu-Aboagye",
             "location": "Accra",
             "phone": "0242407403",

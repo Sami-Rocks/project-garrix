@@ -23,7 +23,8 @@ export class SignupComponent implements OnInit {
       location: ['', [Validators.required, Validators.minLength(4)]],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      id: Math.floor(Math.random() * 999)
     })
   }
 
@@ -56,6 +57,10 @@ export class SignupComponent implements OnInit {
         this.router.navigateByUrl('dashboard')
       }
     }
+  }
+
+  login(){
+    this.router.navigateByUrl('login')
   }
 
 }

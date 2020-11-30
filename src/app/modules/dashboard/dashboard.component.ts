@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { events } from './../../../assets/data.json'
+import { Router } from '@angular/router';
+import { LocalStorageService } from './../../core/localStorage/local-storage.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,39 +12,61 @@ export class DashboardComponent implements OnInit {
   public calendar: CalendarDay[] = []; 
 
   submitBtn = "Submit"
+  logoutBtn = "Logout"
+  editBtn = "Edit"
   add = "Add Application"
   showForm:boolean = false
   applicationForm:FormGroup
-
+  user
+  edit_id
+  edit:boolean = false
+  allApplications = []
+  userApplications =[]
   constructor(
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private router:Router,
+    private localStorageService:LocalStorageService
   ) { 
+    this.user = this.localStorageService.getUser()
+
     this.applicationForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      location: ['', Validators.required],
+      id: Math.floor(Math.random() * 999),
+      name: [this.user.name, Validators.required],
+      location: [this.user.location, Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
-      date: ''
+      date: '',
+      userID: this.user.id
     })
   }
 
   showOrHideForm(id=null){
     if(id == null){
-      console.log('no id')
       this.showForm = !this.showForm
+      this.edit = false
     }else{
+      this.edit = true
+      this.edit_id = id
+      let app = []
+      app = this.userApplications.filter(element => element.id == this.edit_id)
+      this.title.setValue(app[0].title)
+      this.description.setValue(app[0].description)
+      this.date.setValue(app[0].date)
       this.showForm = !this.showForm
     }
   }
 
   ngOnInit(): void {
+    this.userApplications = this.localStorageService.getUserApplications(this.user.id)
+    if(!this.localStorageService.checkIfSignedIn()){
+      this.router.navigateByUrl('login')
+    }
+
     this.generateCalendarDays();
-    const events_:Array<any> = events
-    events_.forEach(event => {
-      var date = new Date();
-      date = new Date(date.setDate(date.getDate() + Math.floor(Math.random() * 20)))
-      const dateIndex = this.calendar.findIndex((object => object.date.getDate() == date.getDate())) 
-      this.calendar[dateIndex].events.push(event)
+    this.allApplications = this.localStorageService.getAllApplications()
+
+    this.allApplications.forEach(element => {
+      element.date = new Date(element.date)
     });
 
   }
@@ -56,7 +79,7 @@ export class DashboardComponent implements OnInit {
 
     let dateToAdd = startingDateOfCalendar;
 
-    for (var i = 0; i < 42; i++) {
+    for (var i = 0; i < 14; i++) {
       this.calendar.push(new CalendarDay(new Date(dateToAdd)));
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1)); 
     }
@@ -88,10 +111,18 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  submit(data){
+  submit(){
     if(!this.applicationForm.invalid){
       this.showForm = !this.showForm
-      console.log(data)
+      this.localStorageService.addApplication(this.applicationForm.value)
+      this.ngOnInit();
+    }
+  }
+  edit_(){
+    if(!this.applicationForm.invalid){
+      this.showForm = !this.showForm
+      this.localStorageService.editApplication(this.edit_id, this.applicationForm.value)
+      this.ngOnInit();
     }
   }
 
@@ -109,6 +140,11 @@ export class DashboardComponent implements OnInit {
   }
   get date(){
     return this.applicationForm.get("date")
+  }
+
+  logout(){
+    this.localStorageService.logout()
+    this.router.navigateByUrl('home')
   }
 }
 
