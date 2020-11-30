@@ -1,25 +1,28 @@
 import { Injectable } from '@angular/core';
-import { events } from './../../../assets/data.json';
+import { appointments } from './../../../assets/data.json';
 import { users } from './../../../assets/data.json';
+import { available_days } from './../../../assets/data.json';
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
 
   usersKey = "users"
-  eventsKey = "events"
+  appKey = "events"
   signedInUserKey = "signedInUser"
-
+  dayKey = "day"
   constructor(
   ) { }
-  events_ = events
+  appointments_ = appointments
   users_ = users
+  available_days_ = available_days
   checkLocalStorage(){
     if(localStorage.length>0){
       return true
     }else{
       localStorage.setItem(this.usersKey, JSON.stringify(this.users_))
-      localStorage.setItem(this.eventsKey, JSON.stringify(this.events_))
+      localStorage.setItem(this.appKey, JSON.stringify(this.appointments_))
+      localStorage.setItem(this.dayKey, JSON.stringify(this.available_days_))
       return true
     }
   }
@@ -33,15 +36,15 @@ export class LocalStorageService {
       return true
     }
   }
-  getAllApplications(){
+  getAllDays(){
     let events = []
-    events = JSON.parse(localStorage.getItem(this.eventsKey))
+    events = JSON.parse(localStorage.getItem(this.dayKey))
     return events
   }
 
-  getUserApplications(id){
+  getUserAppointments(id){
     let events =[] 
-    events = JSON.parse(localStorage.getItem(this.eventsKey))
+    events = JSON.parse(localStorage.getItem(this.appKey))
     let app = events.filter(el => el.userID == id)
     return app
   }
@@ -80,22 +83,30 @@ export class LocalStorageService {
     localStorage.removeItem(this.signedInUserKey)
   }
 
-  addApplication(data){
+  addAppointment(data){
     let events = []
-    events = JSON.parse(localStorage.getItem(this.eventsKey))
+    events = JSON.parse(localStorage.getItem(this.appKey))
     events.push(data)
-    localStorage.setItem(this.eventsKey, JSON.stringify(events))
+    localStorage.setItem(this.appKey, JSON.stringify(events))
+    
   }
 
-  editApplication(id, data){
+  editAppointment(id, data){
     let events = []
-    events = JSON.parse(localStorage.getItem(this.eventsKey))
+    events = JSON.parse(localStorage.getItem(this.appKey))
     console.log(events)
     let app = events.filter(element => element.id == id)
     events = events.filter(element => element.id != id)
     let newArray = { id: app[0].id, name: app[0].name, userID: app[0].userID, title: data.title, description: data.description, date: data.date, location: data.location }
     events.push(newArray)
-    localStorage.setItem(this.eventsKey, JSON.stringify(events))
+    localStorage.setItem(this.appKey, JSON.stringify(events))
+
+  }
+  deleteAppointment(id){
+    let events = []
+    events = JSON.parse(localStorage.getItem(this.appKey))
+    events = events.filter(element => element.id != id)
+    localStorage.setItem(this.appKey, JSON.stringify(events))
 
   }
 }

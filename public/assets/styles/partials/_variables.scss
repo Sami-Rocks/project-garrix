@@ -1,0 +1,27 @@
+// color palette
+
+$background: #EBEBEBEB;
+
+$light_grey: #A0A0A0;
+$dark_grey: #666666;
+
+$red: #D7060C;
+
+$dark: #271415;
+
+$pink_light: #E2A3AB;
+$pink_dark: #C87B86;
+
+
+%button{
+    border-radius: 7rem;
+    min-width: 20rem;
+    width: fit-content;
+    padding: 1.2rem 3rem;
+    border: .2rem solid $red;
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: .3s all ease;
+}
+

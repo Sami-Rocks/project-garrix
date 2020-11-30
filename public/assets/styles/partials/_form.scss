@@ -14,7 +14,7 @@ form{
             margin-left: 1.2rem;
             margin-bottom: 1rem;
         } 
-        input, textarea, select{
+        input, textarea{
             font-size: 2rem;
             padding: 1.4rem 2rem;
             width: calc(100% - 4rem);
@@ -22,10 +22,7 @@ form{
             border: none;
             margin-top: .5rem;
         }
-        textarea{
-            height: 10rem;
-        }
-        input:focus, textarea:focus, select:focus{
+        input:focus, textarea:focus{
             outline: none;
         }
     }

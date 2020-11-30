@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   user
   edit_id
   edit:boolean = false
-  allApplications = []
+  allDays = []
   userApplications =[]
   constructor(
     private formBuilder:FormBuilder,
@@ -35,7 +35,8 @@ export class DashboardComponent implements OnInit {
       location: [this.user.location, Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
-      date: '',
+      company: [this.user.company, Validators.required],
+      slot: 0,
       userID: this.user.id
     })
   }
@@ -51,21 +52,22 @@ export class DashboardComponent implements OnInit {
       app = this.userApplications.filter(element => element.id == this.edit_id)
       this.title.setValue(app[0].title)
       this.description.setValue(app[0].description)
-      this.date.setValue(app[0].date)
+      this.company.setValue(app[0].company)
+      this.slot.setValue(app[0].slot)
       this.showForm = !this.showForm
     }
   }
 
   ngOnInit(): void {
-    this.userApplications = this.localStorageService.getUserApplications(this.user.id)
+    this.userApplications = this.localStorageService.getUserAppointments(this.user.id)
     if(!this.localStorageService.checkIfSignedIn()){
       this.router.navigateByUrl('login')
     }
 
     this.generateCalendarDays();
-    this.allApplications = this.localStorageService.getAllApplications()
+    this.allDays = this.localStorageService.getAllDays()
 
-    this.allApplications.forEach(element => {
+    this.allDays.forEach(element => {
       element.date = new Date(element.date)
     });
 
@@ -112,20 +114,24 @@ export class DashboardComponent implements OnInit {
   }
 
   submit(){
+    console.log(this.applicationForm.value)
     if(!this.applicationForm.invalid){
       this.showForm = !this.showForm
-      this.localStorageService.addApplication(this.applicationForm.value)
+      this.localStorageService.addAppointment(this.applicationForm.value)
       this.ngOnInit();
     }
   }
   edit_(){
     if(!this.applicationForm.invalid){
       this.showForm = !this.showForm
-      this.localStorageService.editApplication(this.edit_id, this.applicationForm.value)
+      this.localStorageService.editAppointment(this.edit_id, this.applicationForm.value)
       this.ngOnInit();
     }
   }
-
+delete_(id){
+  this.localStorageService.deleteAppointment(id)
+  this.ngOnInit()
+}
   get name(){
     return this.applicationForm.get("name")
   }
@@ -138,8 +144,12 @@ export class DashboardComponent implements OnInit {
   get location(){
     return this.applicationForm.get("location")
   }
-  get date(){
-    return this.applicationForm.get("date")
+
+  get company(){
+    return this.applicationForm.get("company")
+  }
+  get slot(){
+    return this.applicationForm.get("slot")
   }
 
   logout(){
@@ -163,10 +173,4 @@ class CalendarDay {
   }
 
 }
-// class Events {
-//   public date: Date;
-//   public title: string;
-//   public content: string;
-
-// }
 

@@ -12,10 +12,14 @@
 
     <div class="side-bar">
         <div class="application-list">
-            <h2>My Applications</h2>
+            <h2>Your Scheduled Appointments</h2>
             <ul>
                 <li *ngFor="let app of userApplications" >{{app.title}}
-                    <button class="link-btn" (click)="showOrHideForm(app.id)" > edit </button>
+                    <br/>
+                    <span>
+                        <button class="link-btn" (click)="showOrHideForm(app.id)" > edit </button>
+                        <button class="link-btn" style="color: black;" (click)="delete_(app.id)" > delete </button>
+                    </span>
                 </li>
             </ul>
             <div class="add-btn">
@@ -41,6 +45,13 @@
                         <input type="text" formControlName="location" id="location" />
                     </div>
                     <div class="inputField">
+                        <label for="company">
+                            Company
+                            <span *ngIf="company.invalid && company.touched" class="error">   **This Field cannot be empty.</span>
+                        </label><br/>
+                        <input type="text" formControlName="company" id="company" />
+                    </div>
+                    <div class="inputField">
                         <label for="title">
                             Title
                             <span *ngIf="title.invalid && title.touched" class="error">   **This Field cannot be empty.</span>
@@ -55,13 +66,15 @@
                         <textarea formControlName="description" id="description" ></textarea>
                     </div>
                     <div class="inputField">
-                        <label for="date">
-                            Date
-                            <span *ngIf="date.invalid && date.touched" class="error">   **This Field cannot be empty.</span>
+                        <label for="slot">
+                            Available times <sub>(time - day)</sub>
+                            <span *ngIf="slot.invalid && slot.touched" class="error">   **This Field cannot be empty.</span>
                         </label><br/>
-                        <input type="date" formControlName="date" id="date" 
-                        min="2020-01-01" max="2020-12-31">
+                        <select name="slot" id="slot" >
+                            <option  *ngFor="let slot of allDays"  [value]="slot.id"> {{slot.time}} - {{slot.date.getDate()}}/{{slot.date.getMonth()+1}} </option>
+                        </select>
                     </div>
+                    
                     <primary-button *ngIf="!edit" (click)="submit()" [primaryButtonTitle]="submitBtn" ></primary-button>
                     <primary-button *ngIf="edit" (click)="edit_()" [primaryButtonTitle]="editBtn" ></primary-button>
                 </form>
@@ -90,9 +103,9 @@
                         <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}">
                             <strong>{{c.date.getDate()}} </strong> 
                             
-                                <p  *ngFor="let event of allApplications">
+                                <p  *ngFor="let event of allDays">
                                     <ng-template [ngIf]="c.date.getDate() == event.date.getDate()">
-                                        *{{event.title}}
+                                        *{{event.time}}
                                     </ng-template>
                                 </p>
                             

@@ -43,6 +43,13 @@
                 <input type="text" formControlName="phone" id="phone" />
             </div>
             <div class="inputField">
+                <label for="company">
+                    Company
+                    <span *ngIf="company.invalid && company.touched" class="error">   **error.</span>
+                </label><br/>
+                <input type="text" formControlName="company" id="company" />
+            </div>
+            <div class="inputField">
                 <label for="password">
                     Password
                     <span *ngIf="password.invalid && password.touched" class="error">   **Your password is not enough.</span>
