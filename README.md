@@ -1,7 +1,7 @@
 # ProjectGarrix
 
 This app is hosted on firebase.
-link: https://garrixtim.web.app/home
+link: https://garrixx.web.app/home
 
 ###  Instructions
 1. Sign up (or log in if you have already signed up)
